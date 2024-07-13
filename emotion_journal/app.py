@@ -9,9 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///emotions.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Emotion
-
-# Twilio credentials    
+# Twilio credentials (replace with your actual credentials)
 TWILIO_ACCOUNT_SID = 'your_account_sid'
 TWILIO_AUTH_TOKEN = 'your_auth_token'
 TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
@@ -43,4 +41,5 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
+    from models import Emotion  # Import here to avoid circular import
     app.run(debug=True)
