@@ -4,7 +4,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/emotions.db'
+db_path = os.path.join(os.path.dirname(__file__), 'instance', 'emotions.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
