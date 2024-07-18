@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Emotion Journal</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "your_api_key",
+        authDomain: "your_project_id.firebaseapp.com",
+        projectId: "your_project_id",
+        storageBucket: "your_project_id.appspot.com",
+        messagingSenderId: "your_messaging_sender_id",
+        appId: "your_app_id",
+        measurementId: "your_measurement_id"
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      const messaging = firebase.messaging();
+      messaging.requestPermission()
+      .then(function() {
+        console.log('Notification permission granted.');
+        return messaging.getToken();
+      })
+      .then(function(token) {
+        console.log('Token:', token);
+      })
+      .catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      });
+
+      messaging.onMessage(function(payload) {
+        console.log('Message received. ', payload);
+        // Customize notification here
+        const notificationTitle = payload.notification.title;
+        const notificationOptions = {
+          body: payload.notification.body,
+          icon: payload.notification.icon
+        };
+
+        var notification = new Notification(notificationTitle, notificationOptions);
+      });
+    </script>
   </head>
   <body>
     <div class="container">
