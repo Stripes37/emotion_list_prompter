@@ -7,7 +7,6 @@ import okhttp3.*
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,7 +17,13 @@ class MainActivity : AppCompatActivity() {
         sendEmotionToServer("happy", "Feeling great!", "Morning routine", "Woke up refreshed", 8)
     }
 
-    private fun sendEmotionToServer(mainCategory: String, subCategory: String, trigger: String, description: String, rating: Int) {
+    private fun sendEmotionToServer(
+        mainCategory: String,
+        subCategory: String,
+        trigger: String,
+        description: String,
+        rating: Int
+    ) {
         val client = OkHttpClient()
         val url = "http://your_flask_server/api/emotions"
 
